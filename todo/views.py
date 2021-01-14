@@ -19,3 +19,7 @@ def deleteTodo(request, todo_id):
     item_to_delete = TodoItem.objects.get(id=todo_id)
     item_to_delete.delete()
     return HttpResponseRedirect('/todo/')
+
+def updateTodo(request, todo_id):
+    item_to_update = TodoItem.objects.get(id=todo_id)
+    return render(request, 'update.html')

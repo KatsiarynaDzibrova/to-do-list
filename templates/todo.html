@@ -1,7 +1,7 @@
 <style>
 body {font-family: "Lato", sans-serif}
 </style>
-<h1>Todo List</h1>
+<h3>Todo List</h3>
 
 <ul>
     {% for todo_item in todo_items %}
@@ -10,6 +10,7 @@ body {font-family: "Lato", sans-serif}
               style="display: inline"
               method="post" >{% csrf_token %}
             <input type="submit" value="Delete"/>
+            <a href = "{% url 'updateTodo' todo_item.id %}">Update</a>
         </form>
     </li>
     {% endfor %}
