@@ -2,7 +2,7 @@ from django.db import models
 
 
 class TodoItem(models.Model):
-    content = models.TextField(max_length=100)
+    content = models.CharField(max_length=100)
     complete = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
