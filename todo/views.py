@@ -1,19 +1,19 @@
 from django.shortcuts import render
 from .models import TodoItem
 from django.http import HttpResponseRedirect
+from .forms import Form
 
 
 def todoView(request):
     todo_items = TodoItem.objects.all()
-    return render(request, 'todo.html',
-                  {'todo_items': todo_items})
-
+    form = Form()
+    context = {'todo_items': todo_items, 'form': form}
+    return render(request, 'todo.html', context)
 
 def addTodo(request):
-    new_item = TodoItem(content= request.POST['content'])
-    new_item.save()
+    form = Form(request.POST)
+    form.save()
     return HttpResponseRedirect('/todo/')
-
 
 def deleteTodo(request, todo_id):
     item_to_delete = TodoItem.objects.get(id=todo_id)
@@ -22,4 +22,11 @@ def deleteTodo(request, todo_id):
 
 def updateTodo(request, todo_id):
     item_to_update = TodoItem.objects.get(id=todo_id)
-    return render(request, 'update.html')
+    form = Form(instance=item_to_update)
+    if request.method == 'POST':
+        print("here")
+        form = Form(request.POST, instance=item_to_update)
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect('/todo/')
+    return render(request, 'update.html', {'form': form})
