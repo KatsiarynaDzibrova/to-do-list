@@ -5,7 +5,12 @@ body {font-family: "Lato", sans-serif}
 
 <ul>
     {% for todo_item in todo_items %}
-    <li>{{ todo_item.content }}
+    <li>
+    {% if todo_item.complete == True %}
+    <strike>{{ todo_item.content }}</strike>
+    {% else %}
+    <span>{{ todo_item.content }}</span>
+    {% endif %}
         <form action="/deleteTodo/{{todo_item.id}}/"
               style="display: inline"
               method="post" >{% csrf_token %}
