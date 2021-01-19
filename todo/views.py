@@ -7,13 +7,12 @@ from .forms import Form
 def todoView(request):
     todo_items = TodoItem.objects.all()
     form = Form()
+    if request.method == 'POST':
+        form = Form(request.POST)
+        form.save()
+        return HttpResponseRedirect('/todo/')
     context = {'todo_items': todo_items, 'form': form}
     return render(request, 'todo.html', context)
-
-def addTodo(request):
-    form = Form(request.POST)
-    form.save()
-    return HttpResponseRedirect('/todo/')
 
 def deleteTodo(request, todo_id):
     item_to_delete = TodoItem.objects.get(id=todo_id)

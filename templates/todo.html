@@ -16,7 +16,7 @@ body {font-family: "Lato", sans-serif}
     {% endfor %}
 </ul>
 
-<form action="/addTodo/" method="post" >
+<form action="" method="post" >
     {{form.content}}
     {% csrf_token %}
     <input type="submit" value="Add"/>
