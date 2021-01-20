@@ -31,11 +31,7 @@
     <div class="container">
         {% for todo_item in todo_items %}
         <div class="item">
-            <form action="/deleteTodo/{{todo_item.id}}/"
-                  style="display: inline"
-                  method="post">{% csrf_token %}
-                <input type="submit" value="Delete"/>
-            </form>
+            <a href="{% url 'deleteTodo' todo_item.id %}">Delete</a>
 
             <a href="{% url 'updateTodo' todo_item.id %}">Update</a>
 
