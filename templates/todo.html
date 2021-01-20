@@ -4,23 +4,45 @@
 
 <style>
     body {
-        background: #7080D7;
+        background: #38B2CE;
     }
     .center-column {
         width: 600px;
 		margin: 20px auto;
         padding: 20px;
         background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
 	}
     .item {
         padding: 0.7rem;
         margin: 0.3rem;
-        background-color: #FF8100;
+    }
+    .btn {
+        padding: 0.5rem;
+        margin: 2px;
+        color: #fff;
+        box-shadow: 2px 1px 3px 0px rgba(0,0,0,0.75);
+    }
+    .btn-primary {
+        background-color: #4188D2;
+        border: #4188D2;
+    }
+    .btn-info {
+        background-color: #38B2CE;
+        border: #38B2CE;
     }
     h3 {
-        margin: 1rem;
+        margin: 1.5rem;
+        color: #4188D2;
     }
-    input {
+	input{
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 3px;
+		box-sizing: border-box;
+	}
+    input::placeholder {
          background-color: #FFE840;
     }
 </style>
@@ -31,9 +53,9 @@
     <div class="container">
         {% for todo_item in todo_items %}
         <div class="item">
-            <a href="{% url 'deleteTodo' todo_item.id %}">Delete</a>
+            <a class="btn btn-sm btn-warning" href="{% url 'deleteTodo' todo_item.id %}">Delete</a>
 
-            <a href="{% url 'updateTodo' todo_item.id %}">Update</a>
+            <a class="btn btn-sm btn-primary" href="{% url 'updateTodo' todo_item.id %}">Update</a>
 
             {% if todo_item.complete == True %}
             <strike>{{ todo_item.content }}</strike>
@@ -47,6 +69,6 @@
     <form action="" method="post" >
         {{form.content}}
         {% csrf_token %}
-        <input type="submit" value="Add"/>
+        <input class="btn btn-info" type="submit" value="Add"/>
     </form>
 </div>
